@@ -1,0 +1,55 @@
+newmtl MATERIAL_GOLD_CLEAN_material
+illum 7
+Kd 0 0 0
+adobe_interior_color 1 1 1
+Ni 1.6
+adobe_density 0
+Tr 0
+d 1
+Ka 0 0 0
+Ke 0 0 0
+map_Pm 1/tmp_eu_thumb_6abd_1289.png
+adobe_translucence 0
+map_Pr 1/tmp_eu_thumb_f6e9_6b0b.png
+Ns 16
+Ks 1 1 1
+adobe_glow 0
+map_Kd 1/tmp_eu_thumb_c577_0739.png
+norm 1/tmp_eu_thumb_78fb_af7f.png
+disp 1/tmp_eu_thumb_9164_80bf.png
+
+newmtl MODEL_BOTTLE_SQUARE_PART_2_N3D_MATERIAL_GOLD_CLEAN_material_stack
+illum 7
+Kd 0.913726 0.913726 0.913726
+adobe_interior_color 1 1 1
+Ni 1.6
+adobe_density 0
+Tr 0
+d 1
+Ka 0 0 0
+Ke 0 0 0
+map_Pm 1/tmp_eu_thumb_7710_ac39.png
+adobe_map_translucence 1/tmp_eu_thumb_330a_5ece.png
+map_Pr 1/tmp_eu_thumb_c1be_17f6.png
+Ns 16
+Ks 1 1 1
+adobe_glow 0
+map_Kd 1/tmp_eu_thumb_0687_a7a1.png
+norm 1/tmp_eu_thumb_78fb_af7f.png
+
+newmtl MATERIAL_WATER_material
+illum 7
+Kd 1 1 1
+adobe_interior_color 1 1 1
+Ni 1.33
+adobe_density 0
+Tr 0
+d 1
+Ka 0 0 0
+Ke 0 0 0
+Pm 0
+adobe_translucence 1
+Pr 0
+Ns 16
+Ks 1 1 1
+adobe_glow 0
