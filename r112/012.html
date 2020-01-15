@@ -22,7 +22,7 @@
 <script>
 // three.js animataed line using BufferGeometry
 
-var renderer, scene, camera;
+var renderer, scene, camera, geometry;
 
 var line;
 var MAX_POINTS = 500;
@@ -62,15 +62,19 @@ function init() {
 	scene = new THREE.Scene();
 
 	// camera
-	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+    camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+    // 屏正摄像
 	camera.position.set( 0, 0, 1000 );
 
 	// geometry
-	var geometry = new THREE.BufferGeometry();
+	geometry = new THREE.BufferGeometry();
 
-	// attributes
-	var positions = new Float32Array( MAX_POINTS * 3 ); // 3 vertices per point
-	geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+    // attributes
+    // 500个点的x，y，z数据需要1500长度的数组
+    var positions = new Float32Array( MAX_POINTS * 3 ); // 3 vertices per point
+    // 以3个为一组，存入几何的position属性key中，之后会拿出来用，所以几何的顶点数已经被设置为了500
+    geometry.addAttribute( 'position', new THREE.BufferAttribute( positions, 3 ) );
+    
 
 	// drawcalls
 	drawCount = 2; // draw the first 2 points, only
@@ -90,11 +94,12 @@ function init() {
 
 // update positions
 function updatePositions() {
-
+    // 重新拿出1500长度的数组
 	var positions = line.geometry.attributes.position.array;
 
 	var x = y = z = index = 0;
 
+    // 循环500次，给1500长度的数组赋值
 	for ( var i = 0, l = MAX_POINTS; i < l; i ++ ) {
 
 		positions[ index ++ ] = x;
@@ -121,18 +126,27 @@ function animate() {
 
 	requestAnimationFrame( animate );
 
+    // 对500取余数
 	drawCount = ( drawCount + 1 ) % MAX_POINTS;
-
+    // 画多少个顶点
 	line.geometry.setDrawRange( 0, drawCount );
+    const vector = new THREE.Vector3();
+
+    // 打印画出的最后一个顶点
+    console.log(vector.fromBufferAttribute(
+        line.geometry.attributes.position, drawCount - 1
+    ));
 
 	if ( drawCount === 0 ) {
 
 		// periodically, generate new data
-
+        // 如果500个顶点画完了，就重新生成500个点
 		updatePositions();
 
+        // 如果没有这一句，几何中的position虽然被更新了，但是还是画老的顶点
 		line.geometry.attributes.position.needsUpdate = true; // required after the first render
 
+        // 随机设置线材的颜色
 		line.material.color.setHSL( Math.random(), 1, 0.5 );
 
 	}
